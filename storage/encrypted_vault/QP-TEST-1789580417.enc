@@ -1,0 +1,8 @@
+{
+  "paper_code": "QP-TEST-1789580417",
+  "iv": "8e206ChQ6CGGoLDsXjhg0w==",
+  "ciphertext": "qcJIp2WsmOsk/nR8DTNS/9PUlm4pknntGLartSghrHqDv2W1neXdYbiAukepbLd4nUXjALTdn+0wGxojxIhLV+W+XLPuepukFl47qyjTgUU=",
+  "hmac": "P3KZsRLPjaxj04TtYzRh1rfJZ7+Xj2DsFOxWlq+H+aY=",
+  "sha256": "b1c060f41255bdf66876fa023b9ac8248bc2fe1d598d4770db7a708fbcbd734c",
+  "created_at": "2026-09-16T17:40:17.833265+00:00"
+}

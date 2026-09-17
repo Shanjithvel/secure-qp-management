@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SecurePaper — Secure Cloud Question Paper Management System</title>
+  <meta name="description" content="Secure Cloud Question Paper Management System with AES-256 Encryption, SHA-256 Fingerprint, MFA, Time-Based Release Engine, and Dynamic Canvas Watermarking.">
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header>
+    <div class="header-container">
+      <div class="brand-box" onclick="navigateToScreen('home')">
+        <div class="brand-icon">🛡️</div>
+        <div class="brand-text">
+          <h1>SecurePaper</h1>
+          <p>
+            <span>Secure • Reliable • Controlled</span>
+            <span class="status-pill">
+              <span class="pulse-dot"></span>
+              ENCRYPTED (AES-256)
+            </span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Top Nav Links -->
+      <div class="top-nav-links">
+        <a class="nav-link active" onclick="navigateToScreen('home')">Home</a>
+        <a class="nav-link" onclick="navigateToScreen('upload_paper')">Upload</a>
+        <a class="nav-link" onclick="navigateToScreen('reviewer_dash')">Approvals</a>
+        <a class="nav-link" onclick="navigateToScreen('exam_center')">Exam Center</a>
+      </div>
+
+      <!-- User Nav Chip & Auth Buttons -->
+      <div style="display:flex; align-items:center; gap:0.75rem;">
+        <div id="userChipBox" class="user-nav-chip">
+          <div id="userAvatarCircle" class="user-avatar-sm">JV</div>
+          <div style="text-align:left;">
+            <div id="navUserFullName" style="font-weight:700; font-size:0.8rem;">Prof. Alice Vance</div>
+            <span id="navUserRole" class="badge badge-approved" style="font-size:0.6rem; padding:0.05rem 0.35rem;">SETTER</span>
+          </div>
+        </div>
+
+        <button onclick="navigateToScreen('login')" class="btn btn-secondary btn-sm">Sign In</button>
+        <button onclick="navigateToScreen('register')" class="btn btn-primary btn-sm">Register</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- App Main Wrapper with Left Sidebar -->
+  <div class="app-wrapper">
+
+    <!-- Sidebar Navigation (Screens 4-12) -->
+    <aside id="mainSidebar" class="sidebar">
+      <div class="sidebar-user">
+        <div class="user-avatar-sm">🛡️</div>
+        <div>
+          <div id="sideUserName" style="font-weight:700; font-size:0.82rem;">John Doe</div>
+          <span id="sideUserRole" style="font-size:0.7rem; color:var(--text-muted);">Question Setter</span>
+        </div>
+      </div>
+
+      <a class="sidebar-link active" data-screen="setter_dash" onclick="navigateToScreen('setter_dash')">
+        <span>📊</span> Dashboard
+      </a>
+      <a class="sidebar-link" data-screen="upload_paper" onclick="navigateToScreen('upload_paper')">
+        <span>📤</span> Upload Question Paper
+      </a>
+      <a class="sidebar-link" data-screen="reviewer_dash" onclick="navigateToScreen('reviewer_dash')">
+        <span>🔒</span> Reviewer Approvals
+      </a>
+      <a class="sidebar-link" data-screen="admin_dash" onclick="navigateToScreen('admin_dash')">
+        <span>🛡️</span> Admin Console
+      </a>
+      <a class="sidebar-link" data-screen="exam_schedule" onclick="navigateToScreen('exam_schedule')">
+        <span>📅</span> Exam Schedule
+      </a>
+      <a class="sidebar-link" data-screen="exam_center" onclick="navigateToScreen('exam_center')">
+        <span>🏫</span> Exam Center Release
+      </a>
+      <a class="sidebar-link" data-screen="activity_logs" onclick="navigateToScreen('activity_logs')">
+        <span>📋</span> Activity Logs
+      </a>
+      <a class="sidebar-link" data-screen="security_alerts" onclick="navigateToScreen('security_alerts')">
+        <span>🚨</span> Security Alerts
+      </a>
+      <a class="sidebar-link" onclick="navigateToScreen('login')">
+        <span>🚪</span> Sign Out / Switch User
+      </a>
+    </aside>
+
+    <!-- Main Content Screen Views -->
+    <div class="content-area">
+
+      <!-- SCREEN 1: Home Page -->
+      <div id="screen-home" class="screen-view active">
+        <div class="hero-section">
+          <div>
+            <span class="badge badge-approved" style="margin-bottom:1rem;">SECURITY ENTERPRISE PLATFORM</span>
+            <h1 class="hero-title">Secure Question Paper Management System</h1>
+            <p class="hero-subtitle">
+              Ensuring confidentiality, integrity, authentication, and controlled time release of competitive examination question papers prior to scheduled examination times.
+            </p>
+            <div style="display:flex; gap:1rem;">
+              <button onclick="navigateToScreen('login')" class="btn btn-primary" style="padding:0.8rem 2rem;">Sign In to Portal</button>
+              <button onclick="navigateToScreen('register')" class="btn btn-secondary" style="padding:0.8rem 2rem;">Create Account</button>
+            </div>
+
+            <div class="hero-card-grid">
+              <div class="hero-feat-card">
+                <div style="font-size:1.5rem; margin-bottom:0.25rem;">🔐</div>
+                <div style="font-weight:700; font-size:0.82rem;">AES-256 Encryption</div>
+              </div>
+              <div class="hero-feat-card">
+                <div style="font-size:1.5rem; margin-bottom:0.25rem;">🔑</div>
+                <div style="font-weight:700; font-size:0.82rem;">Role-Based Access</div>
+              </div>
+              <div class="hero-feat-card">
+                <div style="font-size:1.5rem; margin-bottom:0.25rem;">⏱️</div>
+                <div style="font-weight:700; font-size:0.82rem;">Time Release Lock</div>
+              </div>
+              <div class="hero-feat-card">
+                <div style="font-size:1.5rem; margin-bottom:0.25rem;">📊</div>
+                <div style="font-weight:700; font-size:0.82rem;">Audit Monitoring</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="text-align:center;">
+            <div class="card-panel" style="padding:3rem 2rem;">
+              <div style="font-size:5rem; margin-bottom:1rem;">🛡️</div>
+              <h3 style="font-size:1.3rem; font-weight:800; margin-bottom:0.5rem;">Zero-Trust Exam Vault</h3>
+              <p style="font-size:0.85rem; color:var(--text-muted);">
+                Files encrypted client-side. Decryption keys strictly withheld server-side until scheduled exam time.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCREEN 2: Login Page -->
+      <div id="screen-login" class="screen-view">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:2.5rem; align-items:center; max-width:960px; margin:2rem auto;">
+          <div class="card-panel" style="padding:2.5rem; text-align:center;">
+            <div style="font-size:4rem; margin-bottom:1rem;">💻</div>
+            <h2 style="font-size:1.4rem; font-weight:800;">Secure Access for Authorized Users</h2>
+            <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.5rem;">
+              Only registered question setters, reviewers, exam centers, and admins can access the system.
+            </p>
+          </div>
+
+          <div class="card-panel" style="padding:2.5rem;">
+            <h2 style="font-size:1.35rem; font-weight:800; margin-bottom:0.25rem;">Welcome Back</h2>
+            <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1.5rem;">Login to your authorized account</p>
+
+            <div id="loginAlert" class="badge badge-rejected" style="display:none; width:100%; margin-bottom:1rem; padding:0.6rem; text-align:center;"></div>
+
+            <form id="loginForm">
+              <div class="form-group">
+                <label class="form-label">Username</label>
+                <input type="text" id="loginUsername" class="form-input" placeholder="Enter username" required value="setter_alice">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Password</label>
+                <input type="password" id="loginPassword" class="form-input" placeholder="••••••••" required value="setter123">
+              </div>
+
+              <button type="submit" class="btn btn-primary" style="width:100%; margin-top:0.5rem;">Login →</button>
+            </form>
+
+            <div style="margin-top:1.5rem; padding-top:1rem; border-top:1px solid var(--border-light);">
+              <p style="font-size:0.72rem; color:var(--text-muted); font-weight:700; margin-bottom:0.6rem;">⚡ Select Demo Account:</p>
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.4rem;">
+                <button onclick="quickSelectUser('setter_alice', 'setter123')" class="btn btn-secondary btn-sm">📝 Question Setter</button>
+                <button onclick="quickSelectUser('admin_bob', 'admin123')" class="btn btn-secondary btn-sm">🔒 Reviewer Admin</button>
+                <button onclick="quickSelectUser('center_delhi', 'center123')" class="btn btn-secondary btn-sm">🏫 Exam Center</button>
+                <button onclick="quickSelectUser('auditor_carol', 'audit123')" class="btn btn-secondary btn-sm">📊 Security Auditor</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MFA 2FA OTP Modal -->
+      <div id="otpModal" class="modal-overlay">
+        <div class="modal-box">
+          <div style="text-align:center; margin-bottom:1rem;">
+            <div style="font-size:2.2rem; margin-bottom:0.2rem;">📱</div>
+            <h3 style="font-size:1.15rem; font-weight:800;">Two-Factor Authentication</h3>
+            <p style="font-size:0.78rem; color:var(--text-muted);">Enter 6-digit OTP code sent to account</p>
+          </div>
+
+          <div id="otpSimulatedNotice" style="background:var(--primary-light); border:1px dashed var(--primary); padding:0.6rem; border-radius:var(--radius-md); font-family:var(--font-mono); font-size:0.82rem; color:var(--primary); text-align:center; margin-bottom:1rem;">
+            🔐 Demo OTP: 123456
+          </div>
+
+          <div id="otpAlert" class="badge badge-rejected" style="display:none; width:100%; margin-bottom:1rem; padding:0.5rem; text-align:center;"></div>
+
+          <form id="otpForm">
+            <input type="hidden" id="otpUsername">
+            <div class="form-group">
+              <input type="text" id="otpCodeInput" class="form-input" style="font-family:var(--font-mono); font-size:1.4rem; text-align:center; letter-spacing:0.35em;" placeholder="000000" maxlength="6" required autofocus>
+            </div>
+            <button type="submit" class="btn btn-success" style="width:100%;">Verify OTP & Complete Sign In</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- SCREEN 3: Registration Page -->
+      <div id="screen-register" class="screen-view">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:2.5rem; align-items:center; max-width:960px; margin:2rem auto;">
+          <div class="card-panel" style="padding:2.5rem; text-align:center;">
+            <div style="font-size:4rem; margin-bottom:1rem;">👤</div>
+            <h2 style="font-size:1.4rem; font-weight:800;">Register to Get Started</h2>
+            <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.5rem;">
+              Choose your role and create your authorized SecurePaper account.
+            </p>
+          </div>
+
+          <div class="card-panel" style="padding:2.5rem;">
+            <h2 style="font-size:1.35rem; font-weight:800; margin-bottom:0.25rem;">Create Account</h2>
+            <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1.25rem;">Join the Secure Question Paper System</p>
+
+            <form onsubmit="event.preventDefault(); alert('Registration successful! Please login with your credentials.'); navigateToScreen('login');">
+              <div class="form-group">
+                <label class="form-label">Full Name</label>
+                <input type="text" class="form-input" placeholder="e.g. Dr. John Doe" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Username</label>
+                <input type="text" class="form-input" placeholder="e.g. john_setter" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input type="email" class="form-input" placeholder="john@univ.edu" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Select Role</label>
+                <select class="form-select" required>
+                  <option value="setter">Question Setter</option>
+                  <option value="approver">Reviewer / Approver</option>
+                  <option value="exam_center">Exam Center Admin</option>
+                  <option value="auditor">Security Auditor</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary" style="width:100%;">Register Account →</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCREEN 4: Question Setter Dashboard -->
+      <div id="screen-setter_dash" class="screen-view active">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title">Dashboard — Question Setter</div>
+            <div class="panel-subtitle">Welcome back, Question Setter</div>
+          </div>
+          <button onclick="navigateToScreen('upload_paper')" class="btn btn-primary">📤 Upload Question Paper</button>
+        </div>
+
+        <div class="metrics-grid">
+          <div class="stat-card">
+            <div>
+              <div class="stat-label">Total Papers</div>
+              <div id="setTotalVal" class="stat-val">2</div>
+            </div>
+            <div class="stat-icon">📄</div>
+          </div>
+          <div class="stat-card">
+            <div>
+              <div class="stat-label">Pending Review</div>
+              <div id="setPendingVal" class="stat-val" style="color:var(--amber);">1</div>
+            </div>
+            <div class="stat-icon">⏳</div>
+          </div>
+          <div class="stat-card">
+            <div>
+              <div class="stat-label">Approved</div>
+              <div id="setApprovedVal" class="stat-val" style="color:var(--emerald);">1</div>
+            </div>
+            <div class="stat-icon">✅</div>
+          </div>
+          <div class="stat-card">
+            <div>
+              <div class="stat-label">Rejected</div>
+              <div class="stat-val" style="color:var(--rose);">0</div>
+            </div>
+            <div class="stat-icon">❌</div>
+          </div>
+        </div>
+
+        <div class="card-panel">
+          <div class="panel-title" style="margin-bottom:1rem;">Recent Question Papers</div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Subject</th>
+                  <th>Code</th>
+                  <th>Upload Date</th>
+                  <th>Status</th>
+                  <th>SHA-256 Fingerprint Checksum</th>
+                </tr>
+              </thead>
+              <tbody id="setterPapersTableBody">
+                <!-- Populated by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCREEN 5: Upload Question Paper -->
+      <div id="screen-upload_paper" class="screen-view">
+        <div style="display:grid; grid-template-columns:1.2fr 1fr; gap:1.75rem;">
+          <div class="card-panel">
+            <div class="panel-header">
+              <div class="panel-title">📤 Upload Question Paper</div>
+            </div>
+
+            <div id="uploadAlert" class="badge badge-rejected" style="display:none; margin-bottom:1rem; padding:0.6rem; text-align:center;"></div>
+
+            <form id="uploadPaperForm">
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+                <div class="form-group">
+                  <label class="form-label">Subject Name</label>
+                  <input type="text" id="upTitle" class="form-input" placeholder="e.g. Data Structures & Algorithms" required value="Data Structures & Algorithms">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Subject Code</label>
+                  <input type="text" id="upCode" class="form-input" placeholder="e.g. CS301" required value="CS301">
+                </div>
+              </div>
+
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+                <div class="form-group">
+                  <label class="form-label">Subject Field</label>
+                  <input type="text" id="upSubject" class="form-input" placeholder="e.g. Computer Science" required value="Computer Science">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Exam Release Date & Time</label>
+                  <input type="datetime-local" id="upReleaseTime" class="form-input" required>
+                  <script>
+                    const d1 = new Date(Date.now() + 20*60*1000);
+                    d1.setMinutes(d1.getMinutes() - d1.getTimezoneOffset());
+                    document.getElementById('upReleaseTime').value = d1.toISOString().slice(0, 16);
+                  </script>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Question Paper Content Payload</label>
+                <textarea id="upContent" class="form-textarea" required placeholder="Type or paste confidential questions...">NATIONAL COMPETITIVE EXAMINATION 2026
+SUBJECT: DATA STRUCTURES & ALGORITHMS (CS301)
+DURATION: 3 HOURS | MAXIMUM MARKS: 100
+
+SECTION A (30 Marks)
+Q1. Implement AVL Tree rotation algorithms and analyze time complexity.
+Q2. Contrast Dijkstra's algorithm vs Bellman-Ford for shortest path calculation.
+
+SECTION B (70 Marks)
+Q3. Design a lock-free multi-threaded B-Tree for database indexing.</textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary" style="width:100%;">Upload Securely (AES-256 Encrypted) →</button>
+            </form>
+          </div>
+
+          <div>
+            <div class="card-panel">
+              <div class="panel-title" style="margin-bottom:0.75rem;">🔒 Security & Encryption Guarantee</div>
+              <ul style="font-size:0.85rem; color:var(--text-muted); line-height:1.7; padding-left:1.25rem;">
+                <li>File will be encrypted with <strong>AES-256 CBC</strong> before cloud storage.</li>
+                <li>Digital <strong>SHA-256 Hash Fingerprint</strong> will be generated for tamper verification.</li>
+                <li>Only authorized users and scheduled exam centers can access the file.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCREEN 6 & 7: Reviewer / Approver Dashboard & Paper Review -->
+      <div id="screen-reviewer_dash" class="screen-view">
+        <div class="card-panel">
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Pending Review — Question Papers</div>
+              <div class="panel-subtitle">Review and approve uploaded examination papers</div>
+            </div>
+            <button onclick="refreshAllData()" class="btn btn-secondary btn-sm">🔄 Refresh List</button>
+          </div>
+
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Subject</th>
+                  <th>Code</th>
+                  <th>Uploaded By</th>
+                  <th>Status</th>
+                  <th>SHA-256 Hash</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="reviewerTableBody">
+                <!-- Populated by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCREEN 8: Admin Dashboard -->
+      <div id="screen-admin_dash" class="screen-view">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title">Dashboard — Admin System Overview</div>
+            <div class="panel-subtitle">System-wide operational metrics and live events</div>
+          </div>
+        </div>
+
+        <div class="metrics-grid">
+          <div class="stat-card">
+            <div>
+              <div class="stat-label">Total Users</div>
+              <div class="stat-val">5</div>
+            </div>
+            <div class="stat-icon">👥</div>
+          </div>
+          <div class="stat-card">
+            <div>
+              <div class="stat-label">Question Papers</div>
+              <div id="adminTotalPapersVal" class="stat-val">2</div>
+            </div>
+            <div class="stat-icon">📄</div>
+          </div>
+          <div class="stat-card">
+            <div>
+              <div class="stat-label">Pending Approvals</div>
+              <div id="adminPendingVal" class="stat-val" style="color:var(--amber);">1</div>
+            </div>
+            <div class="stat-icon">⏳</div>
+          </div>
+          <div class="stat-card">
+            <div>
+              <div class="stat-label">Approved Papers</div>
+              <div id="adminApprovedVal" class="stat-val" style="color:var(--emerald);">1</div>
+            </div>
+            <div class="stat-icon">✅</div>
+          </div>
+          <div class="stat-card">
+            <div>
+              <div class="stat-label">Security Alerts</div>
+              <div id="adminAlertsVal" class="stat-val" style="color:var(--emerald);">0</div>
+            </div>
+            <div class="stat-icon">🚨</div>
+          </div>
+        </div>
+
+        <div class="card-panel">
+          <div class="panel-title" style="margin-bottom:1rem;">Recent Activities</div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Timestamp</th>
+                  <th>User</th>
+                  <th>Action</th>
+                  <th>Status</th>
+                  <th>IP Address</th>
+                </tr>
+              </thead>
+              <tbody id="adminRecentActivityBody">
+                <!-- Populated by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCREEN 9: Exam Schedule (Admin) -->
+      <div id="screen-exam_schedule" class="screen-view">
+        <div class="card-panel">
+          <div class="panel-header">
+            <div class="panel-title">📅 Exam Schedule Management</div>
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.75rem;">
+            <div>
+              <div class="form-group">
+                <label class="form-label">Subject</label>
+                <select class="form-select" id="scheduleSubjectSelect">
+                  <option value="QP-CS401-2026">Advanced Cybersecurity & Cryptography (CS-401)</option>
+                  <option value="QP-CS402-2026">Cloud Computing Architecture (CS-402)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Exam Center</label>
+                <select class="form-select">
+                  <option>EXAM-DEL-01 (Delhi National Exam Center #1)</option>
+                  <option>EXAM-MUM-02 (Mumbai Exam Center #2)</option>
+                </select>
+              </div>
+              <button onclick="alert('Exam schedule updated successfully!');" class="btn btn-primary">Save Exam Schedule →</button>
+            </div>
+
+            <div class="card-panel" style="background:var(--bg-app); border:1px solid var(--border-light);">
+              <div class="panel-title" style="margin-bottom:0.75rem;">Schedule Summary</div>
+              <p style="font-size:0.85rem; color:var(--text-muted); line-height:1.7;">
+                Release lock will enforce time-based decryption at scheduled UTC time. Pre-exam access is strictly forbidden.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCREEN 10: Exam Center Dashboard -->
+      <div id="screen-exam_center" class="screen-view">
+        <div class="card-panel">
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">🏫 Available Question Papers — Exam Center</div>
+              <div class="panel-subtitle">Papers will be accessible only at the scheduled release time</div>
+            </div>
+            <span class="badge badge-approved">CENTER: EXAM-DEL-01</span>
+          </div>
+
+          <div id="decryptionAlert" class="badge badge-rejected" style="display:none; width:100%; margin-bottom:1rem; padding:0.75rem; font-size:0.82rem;"></div>
+
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Subject</th>
+                  <th>Code</th>
+                  <th>Scheduled Release Time</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="examCenterTableBody">
+                <!-- Populated by JS -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Dynamic Watermarked Canvas Reader Section -->
+          <div id="readerSection" class="reader-frame" style="display:none; margin-top:2rem;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.85rem;">
+              <span class="panel-title" style="color:var(--primary);">📜 Decrypted Question Paper Reader</span>
+              <span class="badge badge-approved">INTEGRITY MATCH VERIFIED</span>
+            </div>
+            <p style="font-size:0.78rem; color:var(--text-muted); margin-bottom:1rem;">
+              ⚠️ Recipient identity, center code, IP address, and timestamp are dynamically watermarked across every line to prevent screenshot leaks.
+            </p>
+            <canvas id="watermarkCanvas"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCREEN 11: Activity Logs (Admin) -->
+      <div id="screen-activity_logs" class="screen-view">
+        <div class="card-panel">
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">📋 Activity Logs — Forensic Trail</div>
+              <div class="panel-subtitle">Immutable log recording all logins, uploads, approvals, decryption, and locks</div>
+            </div>
+            <div style="display:flex; gap:0.5rem;">
+              <button onclick="triggerBackup()" class="btn btn-success btn-sm">💾 Backup Snapshot</button>
+              <button onclick="fetchAuditLogs()" class="btn btn-secondary btn-sm">🔄 Refresh</button>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Date & Time</th>
+                  <th>User</th>
+                  <th>Role</th>
+                  <th>Action</th>
+                  <th>Status</th>
+                  <th>IP Address</th>
+                  <th>Event Details</th>
+                </tr>
+              </thead>
+              <tbody id="auditLogTableBody">
+                <!-- Populated by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCREEN 12: Security Alerts (Admin) -->
+      <div id="screen-security_alerts" class="screen-view">
+        <div class="card-panel">
+          <div class="panel-header">
+            <div class="panel-title">🚨 Security Threat & Anomaly Alerts</div>
+          </div>
+
+          <div id="anomalyAlertsContainer">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+
+  <footer>
+    <p>SecurePaper • Secure • Reliable • Controlled • Built with FastAPI, SQLite, AES-256, SHA-256 & HTML5 Canvas Watermark</p>
+  </footer>
+
+  <script src="/static/js/timer.js"></script>
+  <script src="/static/js/reader.js"></script>
+  <script src="/static/js/auth.js"></script>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
